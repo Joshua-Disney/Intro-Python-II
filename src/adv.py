@@ -41,11 +41,17 @@ room['treasure'].s_to = room['narrow']
 
 # Make a new player object that is currently in the 'outside' room.
 
-players = {
-    'Link': Player('Link', 'outside')
-}
 
+player = Player('Link', room['outside'])
+
+print(f"{player.name}'s info: {player} ")
+
+# for i in room:
+#     print(f"{room[i]}")
 # Write a loop that:
+# <------------------------------I don't understand why this would be a loop or how to turn it into one.
+print(f"{player.name} stands in the {player.currentRoom.name}.  {player.currentRoom.description}")
+
 #
 # * Prints the current room name
 # * Prints the current description (the textwrap module might be useful here).
@@ -55,3 +61,57 @@ players = {
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
+
+quit = False
+
+while not quit:
+    command = input(f"\n(N)orth\n(S)outh\n(E)ast\n(W)est\n(Q)uit\n\nCommand: ")
+    command = command.lower().strip()
+    if command == '':
+        continue
+    command = command[0]
+    if command == 'q':  # quit
+        quit = True
+    elif command == 'n':
+        if player.currentRoom.n_to:
+            player.currentRoom = player.currentRoom.n_to
+            print(
+                f"{player.name} moves north into the {player.currentRoom.name}.  {player.currentRoom.description}")
+        else:
+            print(
+                f"You don't see a path in that direction.  {player.currentRoom.description}")
+    elif command == 'w':
+        if player.currentRoom.w_to:
+            player.currentRoom = player.currentRoom.w_to
+            print(
+                f"{player.name} moves west into the {player.currentRoom.name}.  {player.currentRoom.description}")
+        else:
+            print(
+                f"You don't see a path in that direction.  {player.currentRoom.description}")
+    elif command == 'e':
+        if player.currentRoom.e_to:
+            player.currentRoom = player.currentRoom.e_to
+            print(
+                f"{player.name} moves east into the {player.currentRoom.name}.  {player.currentRoom.description}")
+        else:
+            print(
+                f"You don't see a path in that direction.  {player.currentRoom.description}")
+    elif command == 's':
+        if player.currentRoom.s_to:
+            player.currentRoom = player.currentRoom.s_to
+            print(
+                f"{player.name} moves south into the {player.currentRoom.name}.  {player.currentRoom.description}")
+        elif player.currentRoom.name == "Outside Cave Entrance":
+            print(f"""{player.name} decides to go home.  Thank you for playing.
+-
+-
+-
+-
+-
+-
+-
+""")
+            quit = True
+        else:
+            print(
+                f"You don't see a path in that direction.  {player.currentRoom.description}")

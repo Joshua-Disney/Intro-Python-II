@@ -10,7 +10,7 @@ class Player:
         self.items = []
 
     def __str__(self):
-        return f"{self.name}: {self.currentRoom}, {self.items}"
+        return f"Name: {self.name}, Current Room: {self.currentRoom.name}, Items: {self.items}"
 
     def __repr__(self):
         return f"Player({repr(self.name)})"

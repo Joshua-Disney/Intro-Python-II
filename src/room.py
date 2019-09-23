@@ -14,8 +14,29 @@ class Room:
 
         self.items = []
 
+    def build_directions(self):
+        final = ""
+        if self.n_to:
+            final = f"n: {self.n_to.name}"
+        if self.s_to:
+            final += f", s: {self.s_to.name}" if len(
+                final) != 0 else f"s: {self.s_to.name}"
+            # if len(final) != 0:
+            #     final += f", s: {self.s_to.name}"
+            # else:
+            #     final = f"s: {self.s_to.name}"
+        if self.w_to:
+            final += f", w: {self.w_to.name}" if len(
+                final) != 0 else f"w: {self.w_to.name}"
+        if self.e_to:
+            final += f", e: {self.e_to.name}" if len(
+                final) != 0 else f"e: {self.e_to.name}"
+        return final
+
     def __str__(self):
-        return f"""{self.name}: {self.description}, n:{self.n_to}, s:{self.s_to}, e:{self.e_to}, w:{self.w_to}"""
+        return f"""Name: {self.name}, 
+Description: {self.description}, 
+Directions: {self.build_directions()}"""
 
     def __repr__(self):
         return f"Item({repr(self.name)})"
